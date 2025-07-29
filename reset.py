@@ -2,11 +2,10 @@ import mysql.connector
 from datetime import datetime, timedelta
 
 DB_CONFIG = {
-        host="db4free.net",
-        user="sudharsan",               
-        password="sudharsan@sql",    
-        database="turfbooking",         
-        port=3306
+    'host': 'localhost',
+    'user': 'root',
+    'password': 'sudharsan@sql1121',
+    'database': 'turf_booking'
 }
 
 def reset_database():
