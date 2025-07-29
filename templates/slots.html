@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TurfEase - Select Slot</title>
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-image: url("{{ url_for('static', filename='slots.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+
+    header, nav, footer, .container {
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.7);
+      margin: 50px auto;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 600px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
+
+    select, input[type="text"], button {
+      padding: 0.7rem;
+      font-size: 16px;
+      border-radius: 6px;
+      width: 80%;
+      margin-bottom: 1rem;
+      border: none;
+    }
+
+    select, input[type="text"] {
+      background-color: #eee;
+      color: #333;
+    }
+
+    button {
+      background-color: #61c527;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #42a508;
+    }
+
+    footer {
+      background-color: rgba(0,0,0,0.6);
+      color: #ccc;
+      font-size: 14px;
+      margin-top: 3rem;
+    }
+
+    aside {
+      text-align: center;
+      background-color: #2f7207;
+      padding: 10px;
+    }
+
+    marquee {
+      color: white;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 style="color:aliceblue"><i>TURF~EASE</i></h1>
+  </header>
+
+  <div class="container">
+    <h2 style="color:aliceblue">Available Slots on {{ selected_date }}</h2>
+
+    <form method="POST" action="{{ url_for('book') }}">
+      <input type="hidden" name="date" value="{{ selected_date }}">
+      
+      <select name="slot_id" required>
+        {% for slot in slots %}
+          <option value="{{ slot[0] }}">{{ slot[1] }}</option>
+        {% endfor %}
+      </select><br>
+      
+      <input type="text" name="name" placeholder="Enter your name" required><br>
+      <button type="submit">Book</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 TurfEase. All rights reserved.</p>
+  </footer>
+
+  <aside>
+    <marquee> TurfEase - Real-time Turf Booking System </marquee>
+  </aside>
+
+</body>
+</html>

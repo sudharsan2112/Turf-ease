@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Booking Result</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #28a745;
+    }
+
+    p {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    img {
+      margin-top: 20px;
+      border: 4px solid #28a745;
+      border-radius: 10px;
+      max-width: 250px;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  {% if success %}
+    <h2>Booking successful!</h2>
+    <p>Hi {{ name }}, your turf has been booked on {{ date }}.</p>
+    <p>Scan this QR code at the turf gate:</p>
+    <img src="data:image/png;base64,{{ qr_img }}" alt="QR Code">
+  {% else %}
+    <h2 style="color: red;">Booking failed!</h2>
+    <p>This slot might already be booked. Please try again.</p>
+  {% endif %}
+
+  <br><a href="{{ url_for('index') }}">Go back</a>
+
+</body>
+</html>
