@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from reset import reset_database
 import model
 import qrcode
 import base64
@@ -35,13 +36,16 @@ def book():
     else:
         return render_template('result.html', success=False, name=name, date=date)
 
-@app.route('/admin/reset')
+@app.route("/reset", methods=["GET", "POST"])
 def reset():
-    try:
-        subprocess.run(['python', 'reset.py'], check=True)
-        message = "Database has been reset successfully."
-    except subprocess.CalledProcessError:
-        message = "Failed to reset the database."
+    message = ""
+    if request.method == "POST":
+        password = request.form.get("password")
+        if password == "admin123":  
+            reset_database()
+            message = "✅ Database reset successfully!"
+        else:
+            message = "❌ Incorrect password. Reset denied."
     return render_template("admin.html", message=message)
 
 if __name__ == '__main__':
